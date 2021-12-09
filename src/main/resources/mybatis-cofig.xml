@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+    <!--引入属性配置文件,必须放最上面-->
+    <properties resource="db.properties"/>
+
+
+    <!--打印日志-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+
+    <!--给resultType里全限定名称起别名-->
+    <typeAliases>
+       <!--1..给类起别名-->
+       <!-- <typeAlias type="com.fj.domain.Student" alias="stu"/>-->
+        <!--批量起别名，给包下所有的类起别名，别名是类名不区分大小写
+        注意当不同包下有相同类名的时候，起的别名会一样，在写的时候mybatis分辨不出来，容易出错-->
+       <!-- <package name="com.fj.domain"/>-->
+   </typeAliases>
+
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+
+        <mapper resource="com/fj/dao/StudentDao.xml"/>
+        
+       <!-- <mapper class="com.fj.dao.StudentDao"/>-->
+
+        <!--批量注册mapper映射文件-->
+        <!--<package name="com.fj.dao"/>-->
+
+    </mappers>
+</configuration>
